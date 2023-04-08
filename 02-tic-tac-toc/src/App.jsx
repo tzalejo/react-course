@@ -62,7 +62,16 @@ function App() {
     if (newWinner) {
       setWinner(newWinner); // actualiza el estado, y este es asyncrono..
       // alert(`El ganador es ${newWinner}`);
+    } else if (checkEndGame(newBoard)) {
+      setWinner(false);
     }
+  };
+
+  const checkEndGame = (newBoard) => {
+    // revisamos si hay un empate
+    // si no hay mas espacios vacios
+    // en le tablero.
+    return newBoard.every((square) => square !== null);
   };
 
   const checkWinner = (boardToCheck) => {
@@ -90,6 +99,10 @@ function App() {
   return (
     <main className="board">
       <h1>Tic tac toc</h1>
+      <button type="button" onClick={resetGame}>
+        {' '}
+        Reset del Juego
+      </button>
       <section className="game">
         {board.map((_, index) => {
           return (
